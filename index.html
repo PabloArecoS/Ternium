@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Importar la fuente Didact Gothic desde Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap" rel="stylesheet">
+    <title>Formulario de Justificación de Ciberseguridad</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="text-center">
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3a/Ternium_logo.svg/220px-Ternium_logo.svg.png" class="img-fluid">
+        </div>
+        <h1 class="text-center mb-4">Justificación de Alerta</h1>
+        <form id="justificacion-form" class="needs-validation" novalidate>
+            <div class="form-group">
+                <label for="id">ID de Monitoreo</label>
+                <input type="text" id="id" name="id" class="form-control" readonly value="1">
+            </div>
+
+            <div class="form-group">
+                <label for="tipo_alerta">Tipo de Alerta</label>
+                <input type="text" id="tipo_alerta" name="tipo_alerta" class="form-control" readonly value="Ciberataque">
+            </div>
+
+            <div class="form-group">
+                <label for="fecha">Fecha de Alerta</label>
+                <input type="text" id="fecha" name="fecha" class="form-control" readonly value="2023-09-01">
+            </div>
+
+            <div class="form-group">
+                <label for="justificacion_select">Justificación Seleccionable</label>
+                <select id="justificacion_select" name="justificacion_select" class="form-control" required>
+                    <!-- Opciones se llenarán dinámicamente con JavaScript -->
+                </select>
+                <div class="invalid-feedback">
+                    Por favor, seleccione una opción.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="justificacion_manual">Justificación Manual</label>
+                <textarea id="justificacion_manual" name="justificacion_manual" class="form-control" rows="4" required></textarea>
+                <div class="invalid-feedback">
+                    Por favor, escriba una justificación en sus propias palabras.
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Enviar Justificación</button>
+        </form>
+    </div>
+    <footer>
+        
+    </footer>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
