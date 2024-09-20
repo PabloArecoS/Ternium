@@ -21,12 +21,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const select = document.getElementById('justificacion_select');
     select.innerHTML = ''; // Limpiar las opciones existentes
 
-    params.opciones.forEach(opcion => {
+    // Verificar si hay opciones en los parámetros de la URL
+    if (params.opciones.length > 0) {
+        params.opciones.forEach(opcion => {
+            const optionElement = document.createElement('option');
+            optionElement.value = opcion;
+            optionElement.textContent = opcion;
+            select.appendChild(optionElement);
+        });
+    } else {
+        // Si no hay opciones, agregar "No aplica"
         const optionElement = document.createElement('option');
-        optionElement.value = opcion;
-        optionElement.textContent = opcion;
+        optionElement.value = "No aplica";
+        optionElement.textContent = "No aplica";
         select.appendChild(optionElement);
-    });
+    }
 
     //Funciones para eventos del mouse
     select.addEventListener('mouseover', (event) => {
