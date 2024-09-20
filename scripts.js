@@ -70,7 +70,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 body: JSON.stringify(data)
             }).then(response => {
                 if (response.ok) {
-                    alert('Datos enviados correctamente');
+                    // Ocultar el formulario
+                    document.getElementById('justificacion-form').style.display = 'none';
+                    // Mostrar el mensaje de confirmación
+                    document.getElementById('confirmationMessage').style.display = 'block';
+                    //alert('Datos enviados correctamente');
                 } else {
                     alert('Error al enviar los datos');
                 }
