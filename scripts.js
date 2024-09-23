@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
             id: queryParams.get('id'),
             tipo_alerta: queryParams.get('tipo_alerta'),
             fecha: queryParams.get('fecha'),
-            opciones: queryParams.get('opciones') ? queryParams.get('opciones').split(',') : []
+            opciones: queryParams.get('opciones') ? queryParams.get('opciones').split(';') : []
         };
     }
 
