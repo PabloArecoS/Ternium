@@ -6,11 +6,91 @@ document.addEventListener('DOMContentLoaded', function() {
             id: queryParams.get('id'),
             tipo_alerta: queryParams.get('tipo_alerta'),
             fecha: queryParams.get('fecha'),
-            opciones: queryParams.get('opciones') ? queryParams.get('opciones').split(';') : []
+            opciones: queryParams.get('opciones') ? queryParams.get('opciones').split(';') : [],
+            idioma: queryParams.get('idioma') || 'ESPAÑOL'
         };
     }
 
     const params = getQueryParams();
+
+    // Diccionario de traducciones
+    const traducciones = {
+        ESPAÑOL: {
+            titulo: "Justificación de Alerta",
+            idMonitoreo: "ID de Monitoreo",
+            tipoAlerta: "Tipo de Alerta",
+            fechaAlerta: "Fecha de Alerta",
+            justificacionSeleccionable: "Justificación Seleccionable",
+            justificacionManual: "Justificación Manual",
+            enviar: "Enviar Justificación",
+            noAplica: "No aplica",
+            invalidFeedback: "Por favor, seleccione una opción.",
+            invalidFeedbackManual: "Por favor, escriba una justificación en sus propias palabras.",
+            confirmacion: "Justificación enviada.",
+            cerrar: "Puede cerrar esta página."
+        },
+        INGLES: {
+            titulo: "Alert Justification",
+            idMonitoreo: "Monitoring ID",
+            tipoAlerta: "Alert Type",
+            fechaAlerta: "Alert Date",
+            justificacionSeleccionable: "Selectable Justification",
+            justificacionManual: "Manual Justification",
+            enviar: "Submit Justification",
+            noAplica: "Not applicable",
+            invalidFeedback: "Please select an option.",
+            invalidFeedbackManual: "Please provide a justification in your own words.",
+            confirmacion: "Justification submitted.",
+            cerrar: "You can close this page."
+        },
+        PORTUGUES: {
+            titulo: "Justificativa de Alerta",
+            idMonitoreo: "ID de Monitoramento",
+            tipoAlerta: "Tipo de Alerta",
+            fechaAlerta: "Data da Alerta",
+            justificacionSeleccionable: "Justificativa Selecionável",
+            justificacionManual: "Justificativa Manual",
+            enviar: "Enviar Justificativa",
+            noAplica: "Não aplicável",
+            invalidFeedback: "Por favor, selecione uma opção.",
+            invalidFeedbackManual: "Por favor, escreva uma justificativa com suas próprias palavras.",
+            confirmacion: "Justificativa enviada.",
+            cerrar: "Você pode fechar esta página."
+        },
+        INTERNACIONAL: {
+            titulo: "Justificación de Alerta / Alert Justification",
+            idMonitoreo: "ID de Monitoreo / Monitoring ID",
+            tipoAlerta: "Tipo de Alerta / Alert Type",
+            fechaAlerta: "Fecha de Alerta / Alert Date",
+            justificacionSeleccionable: "Justificación Seleccionable / Selectable Justification",
+            justificacionManual: "Justificación Manual / Manual Justification",
+            enviar: "Enviar Justificación / Submit Justification",
+            noAplica: "No aplica / Not applicable",
+            invalidFeedback: "Por favor, seleccione una opción. / Please select an option.",
+            invalidFeedbackManual: "Por favor, escriba una justificación en sus propias palabras. / Please provide a justification in your own words.",
+            confirmacion: "Justificación enviada. / Justification submitted.",
+            cerrar: "Puede cerrar esta página. / You can close this page."
+        }
+    };
+
+    // Función para aplicar las traducciones
+    function aplicarTraducciones(idioma) {
+        const elementos = traducciones[idioma];
+        // Cambiar los textos del formulario
+        document.querySelector('h1').textContent = elementos.titulo;
+        document.querySelector('label[for="id"]').textContent = elementos.idMonitoreo;
+        document.querySelector('label[for="tipo_alerta"]').textContent = elementos.tipoAlerta;
+        document.querySelector('label[for="fecha"]').textContent = elementos.fechaAlerta;
+        document.querySelector('label[for="justificacion_select"]').textContent = elementos.justificacionSeleccionable;
+        document.querySelector('label[for="justificacion_manual"]').textContent = elementos.justificacionManual;
+        document.querySelector('button[type="submit"]').textContent = elementos.enviar;
+        //Cambiar los mensajes de validación
+        document.querySelector('#feedback-select').textContent = elementos.invalidFeedback;
+        document.querySelector('#feedback-manual').textContent = elementos.invalidFeedbackManual;
+    }
+
+    // Llamar a la función al cargar la página
+    aplicarTraducciones(params.idioma);
 
     // Establecer los valores de los campos
     if (params.id) document.getElementById('id').value = params.id;
@@ -34,6 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const optionElement = document.createElement('option');
         optionElement.value = "No aplica";
         optionElement.textContent = "No aplica";
+        //optionElement.textContent = elementos.noAplica;
         select.appendChild(optionElement);
     }
 
@@ -82,6 +163,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Ocultar el formulario
                     document.getElementById('justificacion-form').style.display = 'none';
                     // Mostrar el mensaje de confirmación
+                    //document.getElementById('confirmationMessage').style.display = 'block';
+                    const elementos = traducciones[params.idioma];
+                    document.getElementById('confirmationMessage').innerHTML = `<p>${elementos.confirmacion}</p><p>${elementos.cerrar}</p>`;
                     document.getElementById('confirmationMessage').style.display = 'block';
                     //alert('Datos enviados correctamente');
                 } else {
@@ -93,6 +177,4 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     });
-
-    //Funcion para idioma
 });
