@@ -81,6 +81,14 @@ select option:checked {
     margin-top: 20px;
     color: #fc4e22;
 }
+#validationMessage {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+    color: #fc4e22;
+}
+
 
 img{
     max-width: 200px;

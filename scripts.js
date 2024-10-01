@@ -13,13 +13,60 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const params = getQueryParams();
 
+    // Hacer la llamada al flujo de Power Automate usando el ID
+    if (params.id) {
+        console.log("ID enviado al flujo:", params.id); // Verificar el ID que se envía
+    
+        fetch('https://prod-47.westus.logic.azure.com:443/workflows/a25cb4f1cd5142798d48287903968328/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=gK1t32xsHbu3JwV9JBTaCfO2G0fv22lTOZTW59_kV5w', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id: params.id }) // Pasar el ID al flujo
+        })
+        .then(response => {
+            console.log("Estado de la respuesta:", response.status); // Mostrar el estado HTTP de la respuesta
+    
+            // Verificar si la respuesta fue exitosa (status 200)
+            if (!response.ok) {
+                throw new Error('Respuesta no exitosa, estado: ' + response.status);
+            }
+            
+            // Intentar convertir la respuesta a JSON
+            return response.json();
+        })
+        .then(data => {
+            console.log("Datos recibidos del flujo:", data); // Mostrar los datos recibidos
+            
+            // Verificar si los datos contienen lo que esperamos
+            document.getElementById('tipo_alerta').value = data.tipo_alerta || "Sin datos";
+            document.getElementById('fecha').value = data.usuario || "Sin datos";
+            document.getElementById('justificacion_manual').value = data.justificacion || "Sin datos";
+    
+            // Lógica adicional si la justificación está vacía
+            if (data.justificacion.length == "") {
+                
+            } else {
+                document.getElementById('justificacion-form').style.display = 'none';
+                const elementos = traducciones[params.idioma];
+                document.getElementById('validationMessage').innerHTML = `<p>${elementos.validacion}</p><p>${elementos.contacto}</p>`;
+                document.getElementById('validationMessage').style.display = 'block';
+            }
+        })
+        .catch(error => {
+            console.error('Error al obtener los datos:', error.message); // Mostrar el mensaje de error
+            alert('Hubo un error al consultar los datos.');
+        });
+    }
+
+
     // Diccionario de traducciones
     const traducciones = {
         ESPAÑOL: {
             titulo: "Justificación de Alerta",
             idMonitoreo: "ID de Monitoreo",
             tipoAlerta: "Tipo de Alerta",
-            fechaAlerta: "Fecha de Alerta",
+            fechaAlerta: "Usuario de Alerta",
             justificacionSeleccionable: "Justificación Seleccionable",
             justificacionManual: "Justificación Manual",
             enviar: "Enviar Justificación",
@@ -27,13 +74,15 @@ document.addEventListener('DOMContentLoaded', function() {
             invalidFeedback: "Por favor, seleccione una opción.",
             invalidFeedbackManual: "Por favor, escriba una justificación en sus propias palabras.",
             confirmacion: "Justificación enviada.",
-            cerrar: "Puede cerrar esta página."
+            cerrar: "Puede cerrar esta página.",
+            validacion: "Su justificación ya fue respondida o su caso fue cerrado.",
+            contacto: "Contacte al area de Ciberseguridad para más información."
         },
         INGLES: {
             titulo: "Alert Justification",
             idMonitoreo: "Monitoring ID",
             tipoAlerta: "Alert Type",
-            fechaAlerta: "Alert Date",
+            fechaAlerta: "Alert User",
             justificacionSeleccionable: "Selectable Justification",
             justificacionManual: "Manual Justification",
             enviar: "Submit Justification",
@@ -41,13 +90,15 @@ document.addEventListener('DOMContentLoaded', function() {
             invalidFeedback: "Please select an option.",
             invalidFeedbackManual: "Please provide a justification in your own words.",
             confirmacion: "Justification submitted.",
-            cerrar: "You can close this page."
+            cerrar: "You can close this page.",
+            validacion: "Su justificación ya fue respondida o su caso fue cerrado.",
+            contacto: "Contacte al area de Ciberseguridad para más información."
         },
         PORTUGUES: {
             titulo: "Justificativa de Alerta",
             idMonitoreo: "ID de Monitoramento",
             tipoAlerta: "Tipo de Alerta",
-            fechaAlerta: "Data da Alerta",
+            fechaAlerta: "Usuário da Alerta",
             justificacionSeleccionable: "Justificativa Selecionável",
             justificacionManual: "Justificativa Manual",
             enviar: "Enviar Justificativa",
@@ -55,13 +106,15 @@ document.addEventListener('DOMContentLoaded', function() {
             invalidFeedback: "Por favor, selecione uma opção.",
             invalidFeedbackManual: "Por favor, escreva uma justificativa com suas próprias palavras.",
             confirmacion: "Justificativa enviada.",
-            cerrar: "Você pode fechar esta página."
+            cerrar: "Você pode fechar esta página.",
+            validacion: "Su justificación ya fue respondida o su caso fue cerrado.",
+            contacto: "Contacte al area de Ciberseguridad para más información."
         },
         INTERNACIONAL: {
             titulo: "Justificación de Alerta / Alert Justification",
             idMonitoreo: "ID de Monitoreo / Monitoring ID",
             tipoAlerta: "Tipo de Alerta / Alert Type",
-            fechaAlerta: "Fecha de Alerta / Alert Date",
+            fechaAlerta: "Usuario de Alerta / Alert User",
             justificacionSeleccionable: "Justificación Seleccionable / Selectable Justification",
             justificacionManual: "Justificación Manual / Manual Justification",
             enviar: "Enviar Justificación / Submit Justification",
@@ -69,7 +122,9 @@ document.addEventListener('DOMContentLoaded', function() {
             invalidFeedback: "Por favor, seleccione una opción. / Please select an option.",
             invalidFeedbackManual: "Por favor, escriba una justificación en sus propias palabras. / Please provide a justification in your own words.",
             confirmacion: "Justificación enviada. / Justification submitted.",
-            cerrar: "Puede cerrar esta página. / You can close this page."
+            cerrar: "Puede cerrar esta página. / You can close this page.",
+            validacion: "Su justificación ya fue respondida o su caso fue cerrado.",
+            contacto: "Contacte al area de Ciberseguridad para más información."
         }
     };
 
