@@ -84,7 +84,8 @@ document.addEventListener('DOMContentLoaded', function() {
             confirmacion: "Justificación enviada.",
             cerrar: "Puede cerrar esta página.",
             validacion: "Su justificación ya fue respondida o su caso fue cerrado.",
-            contacto: "Contacte al area de Ciberseguridad para más información."
+            contacto: "Contacte al area de Ciberseguridad para más información.",
+            cargando: "Validando datos..."
         },
         INGLES: {
             titulo: "Alert Justification",
@@ -100,7 +101,8 @@ document.addEventListener('DOMContentLoaded', function() {
             confirmacion: "Justification submitted.",
             cerrar: "You can close this page.",
             validacion: "Your justification has already been answered or your case has been closed.",
-            contacto: "Contact the Cybersecurity area for more information."
+            contacto: "Contact the Cybersecurity area for more information.",
+            cargando: "Validating data..."
         },
         PORTUGUES: {
             titulo: "Justificativa de Alerta",
@@ -116,7 +118,8 @@ document.addEventListener('DOMContentLoaded', function() {
             confirmacion: "Justificativa enviada.",
             cerrar: "Você pode fechar esta página.",
             validacion: "Sua justificativa já foi respondida ou seu caso foi encerrado.",
-            contacto: "Entre em contato com a área de Cibersegurança para mais informações."
+            contacto: "Entre em contato com a área de Cibersegurança para mais informações.",
+            cargando: "Validando dados..."
         },
         INTERNACIONAL: {
             titulo: "Justificación de Alerta / Alert Justification",
@@ -132,7 +135,8 @@ document.addEventListener('DOMContentLoaded', function() {
             confirmacion: "Justificación enviada. / Justification submitted.",
             cerrar: "Puede cerrar esta página. / You can close this page.",
             validacion: "Su justificación ya fue respondida o su caso fue cerrado. / Your justification has already been answered or your case has been closed.",
-            contacto: "Contacte al area de Ciberseguridad para más información. / Contact the Cybersecurity area for more information."
+            contacto: "Contacte al area de Ciberseguridad para más información. / Contact the Cybersecurity area for more information.",
+            cargando: "Validando datos... / Validating data..."
         }
     };
 
@@ -150,6 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
         //Cambiar los mensajes de validación
         document.querySelector('#feedback-select').textContent = elementos.invalidFeedback;
         document.querySelector('#feedback-manual').textContent = elementos.invalidFeedbackManual;
+        document.querySelector('#loadingMessage').textContent = elementos.cargando;
     }
 
     // Llamar a la función al cargar la página
