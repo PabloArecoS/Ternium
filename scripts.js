@@ -49,9 +49,10 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('tipo_alerta').value = data.tipo_alerta || "Sin datos";
             document.getElementById('fecha').value = data.usuario || "Sin datos";
             document.getElementById('justificacion_manual').value = data.justificacion || "";
+            const seEnvia = data.validacion;
     
             // Lógica adicional si la justificación está vacía
-            if (data.justificacion == "") {
+            if (seEnvia == "True") {
                 //Mostrar el formulario
                 document.getElementById('justificacion-form').style.display = 'block';
             } else {
