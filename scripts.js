@@ -13,6 +13,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const params = getQueryParams();
 
+    // Mostrar el mensaje de validación y ocultar el formulario al iniciar
+    document.getElementById('loadingMessage').style.display = 'block';
+    document.getElementById('justificacion-form').style.display = 'none';
+
     // Hacer la llamada al flujo de Power Automate usando el ID
     if (params.id) {
         console.log("ID enviado al flujo:", params.id); // Verificar el ID que se envía
@@ -37,15 +41,19 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(data => {
             console.log("Datos recibidos del flujo:", data); // Mostrar los datos recibidos
+
+            // Ocultar el mensaje de validación
+            document.getElementById('loadingMessage').style.display = 'none';
             
             // Verificar si los datos contienen lo que esperamos
             document.getElementById('tipo_alerta').value = data.tipo_alerta || "Sin datos";
             document.getElementById('fecha').value = data.usuario || "Sin datos";
-            document.getElementById('justificacion_manual').value = data.justificacion || "Sin datos";
+            document.getElementById('justificacion_manual').value = data.justificacion || "";
     
             // Lógica adicional si la justificación está vacía
-            if (data.justificacion.length == "") {
-                
+            if (data.justificacion == "") {
+                //Mostrar el formulario
+                document.getElementById('justificacion-form').style.display = 'block';
             } else {
                 document.getElementById('justificacion-form').style.display = 'none';
                 const elementos = traducciones[params.idioma];
@@ -91,8 +99,8 @@ document.addEventListener('DOMContentLoaded', function() {
             invalidFeedbackManual: "Please provide a justification in your own words.",
             confirmacion: "Justification submitted.",
             cerrar: "You can close this page.",
-            validacion: "Su justificación ya fue respondida o su caso fue cerrado.",
-            contacto: "Contacte al area de Ciberseguridad para más información."
+            validacion: "Your justification has already been answered or your case has been closed.",
+            contacto: "Contact the Cybersecurity area for more information."
         },
         PORTUGUES: {
             titulo: "Justificativa de Alerta",
@@ -107,8 +115,8 @@ document.addEventListener('DOMContentLoaded', function() {
             invalidFeedbackManual: "Por favor, escreva uma justificativa com suas próprias palavras.",
             confirmacion: "Justificativa enviada.",
             cerrar: "Você pode fechar esta página.",
-            validacion: "Su justificación ya fue respondida o su caso fue cerrado.",
-            contacto: "Contacte al area de Ciberseguridad para más información."
+            validacion: "Sua justificativa já foi respondida ou seu caso foi encerrado.",
+            contacto: "Entre em contato com a área de Cibersegurança para mais informações."
         },
         INTERNACIONAL: {
             titulo: "Justificación de Alerta / Alert Justification",
@@ -123,8 +131,8 @@ document.addEventListener('DOMContentLoaded', function() {
             invalidFeedbackManual: "Por favor, escriba una justificación en sus propias palabras. / Please provide a justification in your own words.",
             confirmacion: "Justificación enviada. / Justification submitted.",
             cerrar: "Puede cerrar esta página. / You can close this page.",
-            validacion: "Su justificación ya fue respondida o su caso fue cerrado.",
-            contacto: "Contacte al area de Ciberseguridad para más información."
+            validacion: "Su justificación ya fue respondida o su caso fue cerrado. / Your justification has already been answered or your case has been closed.",
+            contacto: "Contacte al area de Ciberseguridad para más información. / Contact the Cybersecurity area for more information."
         }
     };
 
