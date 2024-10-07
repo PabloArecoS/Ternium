@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 document.getElementById('justificacion-form').style.display = 'none';
                 const elementos = traducciones[params.idioma];
-                document.getElementById('validationMessage').innerHTML = `<p>${elementos.validacion}</p><p>${elementos.contacto}</p>`;
+                document.getElementById('validationMessage').innerHTML = `<p>${elementos.validacion}</p><p>${elementos.contacto}<a href="mailto:TERMXAIPPOWERAUT@ternium.com.mx">TERMXAIPPOWERAUT@ternium.com.mx</a></p>`;
                 document.getElementById('validationMessage').style.display = 'block';
             }
         })
@@ -72,71 +72,71 @@ document.addEventListener('DOMContentLoaded', function() {
     // Diccionario de traducciones
     const traducciones = {
         ESPAÑOL: {
-            titulo: "Justificación de Alerta",
+            titulo: "Justificación de Evento",
             idMonitoreo: "ID de Monitoreo",
-            tipoAlerta: "Tipo de Alerta",
-            fechaAlerta: "Usuario de Alerta",
+            tipoAlerta: "Tipo de Evento",
+            fechaAlerta: "Usuario de Evento",
             justificacionSeleccionable: "Justificación Seleccionable",
             justificacionManual: "Justificación Manual",
             enviar: "Enviar Justificación",
             noAplica: "No aplica",
             invalidFeedback: "Por favor, seleccione una opción.",
-            invalidFeedbackManual: "Por favor, escriba una justificación en sus propias palabras.",
+            invalidFeedbackManual: "Por favor escriba una breve justificación con sus propias palabras.",
             confirmacion: "Justificación enviada.",
             cerrar: "Puede cerrar esta página.",
             validacion: "Su justificación ya fue respondida o su caso fue cerrado.",
-            contacto: "Contacte al area de Ciberseguridad para más información.",
+            contacto: "Contactar al área de proteccción de la información: ",
             cargando: "Validando datos..."
         },
         INGLES: {
-            titulo: "Alert Justification",
+            titulo: "Event Justification",
             idMonitoreo: "Monitoring ID",
-            tipoAlerta: "Alert Type",
-            fechaAlerta: "Alert User",
+            tipoAlerta: "Event Type",
+            fechaAlerta: "Event User",
             justificacionSeleccionable: "Selectable Justification",
             justificacionManual: "Manual Justification",
             enviar: "Submit Justification",
             noAplica: "Not applicable",
             invalidFeedback: "Please select an option.",
-            invalidFeedbackManual: "Please provide a justification in your own words.",
+            invalidFeedbackManual: "Please write a brief justification in your own words.",
             confirmacion: "Justification submitted.",
             cerrar: "You can close this page.",
             validacion: "Your justification has already been answered or your case has been closed.",
-            contacto: "Contact the Cybersecurity area for more information.",
+            contacto: "Contact the Information Protection Area: ",
             cargando: "Validating data..."
         },
         PORTUGUES: {
-            titulo: "Justificativa de Alerta",
+            titulo: "Justificativa de Evento",
             idMonitoreo: "ID de Monitoramento",
-            tipoAlerta: "Tipo de Alerta",
-            fechaAlerta: "Usuário da Alerta",
+            tipoAlerta: "Tipo de Evento",
+            fechaAlerta: "Usuário da Evento",
             justificacionSeleccionable: "Justificativa Selecionável",
             justificacionManual: "Justificativa Manual",
             enviar: "Enviar Justificativa",
             noAplica: "Não aplicável",
             invalidFeedback: "Por favor, selecione uma opção.",
-            invalidFeedbackManual: "Por favor, escreva uma justificativa com suas próprias palavras.",
+            invalidFeedbackManual: "Por favor, escreva uma breve justificativa com suas próprias palavras.",
             confirmacion: "Justificativa enviada.",
             cerrar: "Você pode fechar esta página.",
             validacion: "Sua justificativa já foi respondida ou seu caso foi encerrado.",
-            contacto: "Entre em contato com a área de Cibersegurança para mais informações.",
+            contacto: "Entre em contato com a Área de Proteção de Informações: ",
             cargando: "Validando dados..."
         },
         INTERNACIONAL: {
-            titulo: "Justificación de Alerta / Alert Justification",
+            titulo: "Justificación de Evento / Event Justification",
             idMonitoreo: "ID de Monitoreo / Monitoring ID",
-            tipoAlerta: "Tipo de Alerta / Alert Type",
-            fechaAlerta: "Usuario de Alerta / Alert User",
+            tipoAlerta: "Tipo de Evento / Event Type",
+            fechaAlerta: "Usuario de Evento / Event User",
             justificacionSeleccionable: "Justificación Seleccionable / Selectable Justification",
             justificacionManual: "Justificación Manual / Manual Justification",
             enviar: "Enviar Justificación / Submit Justification",
             noAplica: "No aplica / Not applicable",
             invalidFeedback: "Por favor, seleccione una opción. / Please select an option.",
-            invalidFeedbackManual: "Por favor, escriba una justificación en sus propias palabras. / Please provide a justification in your own words.",
+            invalidFeedbackManual: "Por favor escriba una breve justificación con sus propias palabras. / Please write a brief justification in your own words.",
             confirmacion: "Justificación enviada. / Justification submitted.",
             cerrar: "Puede cerrar esta página. / You can close this page.",
             validacion: "Su justificación ya fue respondida o su caso fue cerrado. / Your justification has already been answered or your case has been closed.",
-            contacto: "Contacte al area de Ciberseguridad para más información. / Contact the Cybersecurity area for more information.",
+            contacto: "Contactar al área de proteccción de la información / Contact the Information Protection Area: ",
             cargando: "Validando datos... / Validating data..."
         }
     };

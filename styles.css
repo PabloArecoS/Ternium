@@ -96,6 +96,13 @@ select option:checked {
     color: #fc4e22;
 }
 
+a{
+    color: #666666;
+}
+a:hover{
+    color: #666666 !important;
+}
+
 img{
     max-width: 200px;
     padding-top: 1%;
