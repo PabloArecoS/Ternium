@@ -1,14 +1,32 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Función para obtener los parámetros de la URL
     function getQueryParams() {
-        const queryParams = new URLSearchParams(window.location.search);
-        return {
-            id: queryParams.get('id'),
-            tipo_alerta: queryParams.get('tipo_alerta'),
-            fecha: queryParams.get('fecha'),
-            opciones: queryParams.get('opciones') ? queryParams.get('opciones').split(';') : [],
-            idioma: queryParams.get('idioma') || 'ESPAÑOL'
-        };
+        // Obtener los parámetros de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        // Extraer el parámetro "data" que contiene la cadena codificada en base64
+        const encodedParams = urlParams.get('data');
+        if (encodedParams) {
+            // Decodificar la cadena base64
+            const decodedParams = atob(encodedParams); // Decodificar base64
+            const queryParams = new URLSearchParams(decodedParams); // Convertir a parámetros de consulta
+            return {
+                id: queryParams.get('id'),
+                tipo_alerta: queryParams.get('tipo_alerta'),
+                fecha: queryParams.get('fecha'),
+                opciones: queryParams.get('opciones') ? queryParams.get('opciones').split(';') : [],
+                idioma: queryParams.get('idioma') || 'ESPAÑOL'
+            };
+        } else {
+            console.error('No se encontró el parámetro codificado en la URL.');
+            const queryParams = new URLSearchParams(window.location.search);
+            return {
+                id: queryParams.get('id'),
+                tipo_alerta: queryParams.get('tipo_alerta'),
+                fecha: queryParams.get('fecha'),
+                opciones: queryParams.get('opciones') ? queryParams.get('opciones').split(';') : [],
+                idioma: queryParams.get('idioma') || 'ESPAÑOL'
+            };
+        }
     }
 
     const params = getQueryParams();
