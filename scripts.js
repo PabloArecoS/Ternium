@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 document.getElementById('justificacion-form').style.display = 'none';
                 const elementos = traducciones[params.idioma];
-                document.getElementById('validationMessage').innerHTML = `<p>${elementos.validacion}</p><p>${elementos.contacto}<a href="mailto:TERMXAIPPOWERAUT@ternium.com.mx">TERMXAIPPOWERAUT@ternium.com.mx</a></p>`;
+                document.getElementById('validationMessage').innerHTML = `<p>${elementos.validacion}</p><p>${elementos.contacto}<a href="mailto:protecciondeinformac@ternium.com">protecciondeinformac@ternium.com</a></p>`;
                 document.getElementById('validationMessage').style.display = 'block';
             }
         })
