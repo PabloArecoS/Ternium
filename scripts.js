@@ -7,8 +7,20 @@ document.addEventListener('DOMContentLoaded', function() {
         const encodedParams = urlParams.get('data');
         if (encodedParams) {
             // Decodificar la cadena base64
-            const decodedParams = atob(encodedParams); // Decodificar base64
+            const decodedParams = decodeBase64ToUTF8(encodedParams); // Decodificar base64
             const queryParams = new URLSearchParams(decodedParams); // Convertir a parámetros de consulta
+            
+            console.log('Parametros decodificados:', decodedParams);
+            // Acceder a los valores:
+            const id = queryParams.get('id');
+            const idioma = queryParams.get('idioma');
+            const fecha = queryParams.get('fecha');
+            const opciones = queryParams.get('opciones');
+
+            console.log('ID:', id);
+            console.log('Idioma:', idioma);
+            console.log('Fecha:', fecha);
+            console.log('Opciones:', opciones);
             return {
                 id: queryParams.get('id'),
                 tipo_alerta: queryParams.get('tipo_alerta'),
@@ -30,6 +42,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const params = getQueryParams();
+
+    function decodeBase64ToUTF8(base64String) {
+        // Decodificar la cadena base64 a una cadena binaria
+        const binaryString = atob(base64String);
+        
+        // Convertir la cadena binaria a un arreglo de bytes
+        const byteArray = Uint8Array.from(binaryString, char => char.charCodeAt(0));
+    
+        // Decodificar el arreglo de bytes usando UTF-8
+        const decoder = new TextDecoder('utf-8');
+        return decoder.decode(byteArray);
+    }
 
     // Mostrar el mensaje de validación y ocultar el formulario al iniciar
     document.getElementById('loadingMessage').style.display = 'block';
