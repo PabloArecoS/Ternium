@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
             confirmacion: "Justificación enviada.",
             cerrar: "Puede cerrar esta página.",
             validacion: "Su justificación ya fue respondida o su caso fue cerrado.",
-            contacto: "Contactar al área de proteccción de la información: ",
+            contacto: "Por consultas contactar a: ",
             cargando: "Validando datos..."
         },
         INGLES: {
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
             confirmacion: "Justification submitted.",
             cerrar: "You can close this page.",
             validacion: "Your justification has already been answered or your case has been closed.",
-            contacto: "Contact the Information Protection Area: ",
+            contacto: "For inquiries contact: ",
             cargando: "Validating data..."
         },
         PORTUGUES: {
@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
             confirmacion: "Justificativa enviada.",
             cerrar: "Você pode fechar esta página.",
             validacion: "Sua justificativa já foi respondida ou seu caso foi encerrado.",
-            contacto: "Entre em contato com a Área de Proteção de Informações: ",
+            contacto: "Para dúvidas entre em contato: ",
             cargando: "Validando dados..."
         },
         INTERNACIONAL: {
@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
             confirmacion: "Justificación enviada. / Justification submitted.",
             cerrar: "Puede cerrar esta página. / You can close this page.",
             validacion: "Su justificación ya fue respondida o su caso fue cerrado. / Your justification has already been answered or your case has been closed.",
-            contacto: "Contactar al área de proteccción de la información / Contact the Information Protection Area: ",
+            contacto: "Por consultas contactar a / For inquiries contact: ",
             cargando: "Validando datos... / Validating data..."
         }
     };
