@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mostrar el mensaje de validación y ocultar el formulario al iniciar
     document.getElementById('loadingMessage').style.display = 'block';
     document.getElementById('justificacion-form').style.display = 'none';
+    document.getElementById('formularioCCTV').style.display = 'none';
 
     // Hacer la llamada al flujo de Power Automate usando el ID
     if (params.id) {
@@ -97,6 +98,11 @@ document.addEventListener('DOMContentLoaded', function() {
             if (seEnvia == "True") {
                 //Mostrar el formulario
                 document.getElementById('justificacion-form').style.display = 'block';
+                // Lógica adicional si el tipo_alerta es CCTV
+                if (data.tipo_alerta == "DESCARGAS CCTV"){
+                    //Mostrar el formulario CCTV
+                    document.getElementById('formularioCCTV').style.display = 'block';
+                    }
             } else {
                 document.getElementById('justificacion-form').style.display = 'none';
                 const elementos = traducciones[params.idioma];
@@ -109,7 +115,6 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Hubo un error al consultar los datos.');
         });
     }
-
 
     // Diccionario de traducciones
     const traducciones = {
