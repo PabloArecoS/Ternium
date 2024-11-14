@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Función para obtener los parámetros de la URL
     function getQueryParams() {
         // Obtener los parámetros de la URL
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Decodificar la cadena base64
             const decodedParams = decodeBase64ToUTF8(encodedParams); // Decodificar base64
             const queryParams = new URLSearchParams(decodedParams); // Convertir a parámetros de consulta
-            
+
             console.log('Parametros decodificados:', decodedParams);
             // Acceder a los valores:
             const id = queryParams.get('id');
@@ -46,10 +46,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function decodeBase64ToUTF8(base64String) {
         // Decodificar la cadena base64 a una cadena binaria
         const binaryString = atob(base64String);
-        
+
         // Convertir la cadena binaria a un arreglo de bytes
         const byteArray = Uint8Array.from(binaryString, char => char.charCodeAt(0));
-    
+
         // Decodificar el arreglo de bytes usando UTF-8
         const decoder = new TextDecoder('utf-8');
         return decoder.decode(byteArray);
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Hacer la llamada al flujo de Power Automate usando el ID
     if (params.id) {
         console.log("ID enviado al flujo:", params.id); // Verificar el ID que se envía
-    
+
         fetch('https://prod-47.westus.logic.azure.com:443/workflows/a25cb4f1cd5142798d48287903968328/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=gK1t32xsHbu3JwV9JBTaCfO2G0fv22lTOZTW59_kV5w', {
             method: 'POST',
             headers: {
@@ -71,49 +71,49 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             body: JSON.stringify({ id: params.id }) // Pasar el ID al flujo
         })
-        .then(response => {
-            console.log("Estado de la respuesta:", response.status); // Mostrar el estado HTTP de la respuesta
-    
-            // Verificar si la respuesta fue exitosa (status 200)
-            if (!response.ok) {
-                throw new Error('Respuesta no exitosa, estado: ' + response.status);
-            }
-            
-            // Intentar convertir la respuesta a JSON
-            return response.json();
-        })
-        .then(data => {
-            console.log("Datos recibidos del flujo:", data); // Mostrar los datos recibidos
+            .then(response => {
+                console.log("Estado de la respuesta:", response.status); // Mostrar el estado HTTP de la respuesta
 
-            // Ocultar el mensaje de validación
-            document.getElementById('loadingMessage').style.display = 'none';
-            
-            // Verificar si los datos contienen lo que esperamos
-            document.getElementById('tipo_alerta').value = data.tipo_alerta || "Sin datos";
-            document.getElementById('fecha').value = data.usuario || "Sin datos";
-            document.getElementById('justificacion_manual').value = data.justificacion || "";
-            const seEnvia = data.validacion;
-    
-            // Lógica adicional si la justificación está vacía
-            if (seEnvia == "True") {
-                //Mostrar el formulario
-                document.getElementById('justificacion-form').style.display = 'block';
-                // Lógica adicional si el tipo_alerta es CCTV
-                if (data.tipo_alerta == "DESCARGAS CCTV"){
-                    //Mostrar el formulario CCTV
-                    document.getElementById('formularioCCTV').style.display = 'block';
+                // Verificar si la respuesta fue exitosa (status 200)
+                if (!response.ok) {
+                    throw new Error('Respuesta no exitosa, estado: ' + response.status);
+                }
+
+                // Intentar convertir la respuesta a JSON
+                return response.json();
+            })
+            .then(data => {
+                console.log("Datos recibidos del flujo:", data); // Mostrar los datos recibidos
+
+                // Ocultar el mensaje de validación
+                document.getElementById('loadingMessage').style.display = 'none';
+
+                // Verificar si los datos contienen lo que esperamos
+                document.getElementById('tipo_alerta').value = data.tipo_alerta || "Sin datos";
+                document.getElementById('fecha').value = data.usuario || "Sin datos";
+                document.getElementById('justificacion_manual').value = data.justificacion || "";
+                const seEnvia = data.validacion;
+
+                // Lógica adicional si la justificación está vacía
+                if (seEnvia == "True") {
+                    //Mostrar el formulario
+                    document.getElementById('justificacion-form').style.display = 'block';
+                    // Lógica adicional si el tipo_alerta es CCTV
+                    if (data.tipo_alerta == "DESCARGAS CCTV") {
+                        //Mostrar el formulario CCTV
+                        document.getElementById('formularioCCTV').style.display = 'block';
                     }
-            } else {
-                document.getElementById('justificacion-form').style.display = 'none';
-                const elementos = traducciones[params.idioma];
-                document.getElementById('validationMessage').innerHTML = `<p>${elementos.validacion}</p><p>${elementos.contacto}<a href="mailto:protecciondeinformac@ternium.com">protecciondeinformac@ternium.com</a></p>`;
-                document.getElementById('validationMessage').style.display = 'block';
-            }
-        })
-        .catch(error => {
-            console.error('Error al obtener los datos:', error.message); // Mostrar el mensaje de error
-            alert('Hubo un error al consultar los datos.');
-        });
+                } else {
+                    document.getElementById('justificacion-form').style.display = 'none';
+                    const elementos = traducciones[params.idioma];
+                    document.getElementById('validationMessage').innerHTML = `<p>${elementos.validacion}</p><p>${elementos.contacto}<a href="mailto:protecciondeinformac@ternium.com">protecciondeinformac@ternium.com</a></p>`;
+                    document.getElementById('validationMessage').style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error('Error al obtener los datos:', error.message); // Mostrar el mensaje de error
+                alert('Hubo un error al consultar los datos.');
+            });
     }
 
     // Diccionario de traducciones
@@ -246,8 +246,66 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Referencias de elementos
+    const hasFileSelect = document.getElementById("hasFile");
+    const fileUploadGroup = document.getElementById("fileUploadGroup");
+    const exportApprovalFileInput = document.getElementById("exportApprovalFile");
+    const fileErrorSpan = document.getElementById("fileError");
+
+    // Escuchar cambios en el campo de selección
+    hasFileSelect.addEventListener("change", () => {
+        if (hasFileSelect.value === "SI") {
+            // Mostrar el campo de archivo
+            fileUploadGroup.style.display = "block";
+        } else {
+            // Ocultar el campo de archivo y reiniciar el valor
+            fileUploadGroup.style.display = "none";
+            exportApprovalFileInput.value = ""; // Reiniciar el archivo
+            fileErrorSpan.style.display = "none"; // Ocultar cualquier error previo
+        }
+    });
+
+    // Variable global para almacenar el archivo en Base64
+    let selectedFileBase64 = null;
+
+    // Función para convertir el archivo a Base64
+    function convertFileToBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result.split(',')[1]); // Eliminar el prefijo "data:..."
+            reader.onerror = error => reject(error);
+            reader.readAsDataURL(file);
+        });
+    }
+    // Escuchar el evento de cambio en el input de archivo
+    document.getElementById("exportApprovalFile").addEventListener("change", async (event) => {
+        const file = event.target.files[0];
+        const errorElement = document.getElementById("fileError");
+        if (file) {
+            const fileName = file.name.toLowerCase();
+            const fileExtension = fileName.split('.').pop();
+            // Verifica si la extensión es .msg
+            if (fileExtension !== "msg") {
+                errorElement.style.display = "block"; // Muestra el mensaje de error
+                event.target.setCustomValidity("Invalid file type"); // Marca el campo como inválido
+                event.target.value = ""; // Resetea el campo de archivo
+            } else {
+                errorElement.style.display = "none"; // Oculta el mensaje de error
+                event.target.setCustomValidity(""); // Limpia el estado de validez del campo
+
+                try {
+                    // Convierte el archivo a Base64
+                    selectedFileBase64 = await convertFileToBase64(file);
+                    console.log("Archivo en Base64:", selectedFileBase64);
+                } catch (error) {
+                    console.error("Error al convertir el archivo a Base64:", error);
+                }
+            }
+        }
+    });
+
     // Manejar el envío del formulario
-    document.getElementById('justificacion-form').addEventListener('submit', function(event) {
+    document.getElementById('justificacion-form').addEventListener('submit', function (event) {
         const form = event.target;
 
         if (form.checkValidity() === false) {
@@ -265,10 +323,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 tipo_alerta: document.getElementById('tipo_alerta').value,
                 fecha: document.getElementById('fecha').value,
                 justificacion_select: document.getElementById('justificacion_select').value,
-                justificacion_manual: document.getElementById('justificacion_manual').value
+                justificacion_manual: document.getElementById('justificacion_manual').value,
+                exportedMedia: document.getElementById("exportedMedia").value,
+                storageLocation: document.getElementById("storageLocation").value,
+                areaLabelProtection: document.getElementById("areaLabelProtection").value,
+                activityPurpose: document.getElementById("activityPurpose").value,
+                sharedWithUser: document.getElementById("sharedWithUser").value,
+                exportApprovalFile: selectedFileBase64  // Archivo en formato Base64
             };
 
-            fetch('https://prod-81.westus.logic.azure.com:443/workflows/0909078705b741b58fae9a8c9029688f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=wB_tlU_5fTaEmHImv6OU-zDEN1PxupJx_lUcJtJPTpc', {
+            //fetch('https://prod-81.westus.logic.azure.com:443/workflows/0909078705b741b58fae9a8c9029688f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=wB_tlU_5fTaEmHImv6OU-zDEN1PxupJx_lUcJtJPTpc', {
+            fetch('https://prod-122.westus.logic.azure.com:443/workflows/1eb1e77b6f444e6c806ff6d96631f0cd/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=i2Rt4rM5VQONe8zHMDvsPfa83qjGpcCgGdzQfhBCS_s', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

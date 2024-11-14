@@ -80,8 +80,16 @@
                     <input type="text" id="sharedWithUser" name="sharedWithUser" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="exportApprovalFile">¿Solicitó el OK correspondiente para realizar el “Export”?</label>
+                    <label>¿Solicitó el OK correspondiente para realizar el “Export”?</label>
+                    <select id="hasFile" class="form-control" required>
+                        <option value="NO">NO</option>
+                        <option value="SI">SI</option>
+                    </select>
+                </div>
+                <div class="form-group" id="fileUploadGroup" style="display: none;">
+                    <label for="exportApprovalFile">Adjunte el correo de autorización en formato .msg</label>
                     <input type="file" id="exportApprovalFile" name="exportApprovalFile" class="form-control" required>
+                    <span id="fileError" class="text-danger" style="display: none;">Solo se permiten archivos con extensión .msg.</span>
                 </div>
             </div>
             <!-- Final del Formulario CCTV -->
