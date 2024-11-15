@@ -246,6 +246,15 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // Inicializar el estado del campo de archivo
+    const hasFile = document.getElementById("hasFile").value;
+    const fileUpload = document.getElementById("exportApprovalFile");
+
+    if (hasFile === "NO") {
+        fileUpload.removeAttribute("required");
+        fileUpload.value = ""; // Reinicia el valor
+    }
+
     // Referencias de elementos
     const hasFileSelect = document.getElementById("hasFile");
     const fileUploadGroup = document.getElementById("fileUploadGroup");
@@ -257,16 +266,18 @@ document.addEventListener('DOMContentLoaded', function () {
         if (hasFileSelect.value === "SI") {
             // Mostrar el campo de archivo
             fileUploadGroup.style.display = "block";
+            exportApprovalFileInput.setAttribute("required", "required");
         } else {
             // Ocultar el campo de archivo y reiniciar el valor
             fileUploadGroup.style.display = "none";
             exportApprovalFileInput.value = ""; // Reiniciar el archivo
+            exportApprovalFileInput.removeAttribute("required");
             fileErrorSpan.style.display = "none"; // Ocultar cualquier error previo
         }
     });
 
     // Variable global para almacenar el archivo en Base64
-    let selectedFileBase64 = null;
+    let selectedFileBase64 = "";
 
     // Función para convertir el archivo a Base64
     function convertFileToBase64(file) {
@@ -329,9 +340,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 areaLabelProtection: document.getElementById("areaLabelProtection").value,
                 activityPurpose: document.getElementById("activityPurpose").value,
                 sharedWithUser: document.getElementById("sharedWithUser").value,
+                hasFile: document.getElementById("hasFile").value,
                 exportApprovalFile: selectedFileBase64  // Archivo en formato Base64
             };
-
+            //Mostrar datos antes de enviar
+            console.log("Datos a enviar a PA:", data);
             //fetch('https://prod-81.westus.logic.azure.com:443/workflows/0909078705b741b58fae9a8c9029688f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=wB_tlU_5fTaEmHImv6OU-zDEN1PxupJx_lUcJtJPTpc', {
             fetch('https://prod-122.westus.logic.azure.com:443/workflows/1eb1e77b6f444e6c806ff6d96631f0cd/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=i2Rt4rM5VQONe8zHMDvsPfa83qjGpcCgGdzQfhBCS_s', {
                 method: 'POST',

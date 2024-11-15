@@ -111,3 +111,24 @@ img{
 .invalid-feedback {
     display: none;
 }
+
+/* Selecciona las etiquetas de los campos requeridos y agrega un * antes del texto */
+label[for]::before {
+    content: "*";
+    color: red; /* Puedes cambiar el color del asterisco si lo prefieres */
+    margin-right: 5px; /* Espacio entre el asterisco y el texto */
+}
+
+/* Aplica solo a las etiquetas de los campos con el atributo "required" */
+input:required + label::before,
+select:required + label::before,
+textarea:required + label::before {
+    content: "*";
+    color: red;
+    margin-right: 5px;
+}
+
+/* Excluir las etiquetas de los campos con la clase no-required */
+.no-required label[for]::before {
+    content: none;
+}
