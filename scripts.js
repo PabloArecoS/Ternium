@@ -102,6 +102,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (data.tipo_alerta == "DESCARGAS CCTV") {
                         //Mostrar el formulario CCTV
                         document.getElementById('formularioCCTV').style.display = 'block';
+                    } else {
+                        //Quitar el atributo required de los campos para CCTV
+                        document.getElementById("exportedMedia").removeAttribute("required"),
+                        document.getElementById("storageLocation").removeAttribute("required"),
+                        document.getElementById("areaLabelProtection").removeAttribute("required"),
+                        document.getElementById("activityPurpose").removeAttribute("required"),
+                        document.getElementById("sharedWithUser").removeAttribute("required"),
+                        document.getElementById("hasFile").removeAttribute("required")
                     }
                 } else {
                     document.getElementById('justificacion-form').style.display = 'none';
